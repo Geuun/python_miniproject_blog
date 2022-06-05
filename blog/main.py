@@ -36,7 +36,11 @@ def write_post():
     post = Post(id, title, content, 0)
     post_list.append(post)
     print("# 게시글이 등록되었습니다.")
-
+    
+# 게시글 목록 함수 선언
+def list_post():
+    """게시글 목록 함수"""
+    print(post_list)
 
 # 메뉴 출력하기
 while True:
@@ -54,7 +58,7 @@ while True:
         if choice == 1:
             write_post()
         elif choice == 2:
-            print("게시글 목록")
+            list_post()
         elif choice == 3:
             print("프로그램 종료")
             break
