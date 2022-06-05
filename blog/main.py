@@ -24,6 +24,20 @@ else:
     f = open(file_path, "w", encoding="utf8", )
     f.close()
 
+# 게시글 쓰기 함수 선언
+def write_post():
+    """게시글 쓰기 함수"""
+    print("\n\n- 게시글 쓰기 -")
+    title = input("제목을 입력해 주세요.\n>>>")
+    content = input("내용을 입력해 주세요.\n>>>")
+    # 글번호
+    id = post_list[-1].get_id() + 1
+    # Post 인스턴스 생성 후 담기
+    post = Post(id, title, content, 0)
+    post_list.append(post)
+    print("# 게시글이 등록되었습니다.")
+
+
 # 메뉴 출력하기
 while True:
     print("\n\n- My BLOG -")
@@ -38,7 +52,7 @@ while True:
         print("숫자를 입력해 주세요.")
     else:
         if choice == 1:
-            print("게시글 쓰기")
+            write_post()
         elif choice == 2:
             print("게시글 목록")
         elif choice == 3:
