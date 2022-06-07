@@ -4,7 +4,7 @@ from secrets import choice
 from post import Post
 
 # data.csv 파일 경로
-file_path = "./data.csv"
+file_path = "./blog/data.csv"
 
 # post 객체를 저장할 리스트 선언
 post_list = []
@@ -40,7 +40,13 @@ def write_post():
 # 게시글 목록 함수 선언
 def list_post():
     """게시글 목록 함수"""
-    print(post_list)
+    print("\n\n- 게시글 목록 -")
+    for post in post_list:
+        print("글 번호 :", post.get_id())
+        print("제목 :", post.get_title())
+        print("조회수 :", post.get_view_count())
+        print("")
+
 
 # 메뉴 출력하기
 while True:
