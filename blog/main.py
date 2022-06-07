@@ -19,7 +19,11 @@ if os.path.exists(file_path):
     reader = csv.reader(f)
     for data in reader:
         # Post 인스턴스 생성하기
-        post = Post(int(data[0]), data[1], data[2], int(data[3]))
+        post = Post(int(data[0]),
+                    data[1],
+                    data[2],
+                    int(data[3]),
+                    )
         post_list.append(post)
 else:
     # data.csv 파일이 없다면 파일 생성하기
@@ -108,13 +112,35 @@ def update_post(target_post):
     print("\n\n- 게시글 수정 -")
     title = input("제목을 입력해주세요.\n>>>")
     content = input("본문을 입력해주세요.\n>>>")
-    target_post.set_post(target_post.id, title, content, target_post.view_count)
+    target_post.set_post(target_post.id,
+                         title, content,
+                         target_post.view_count,
+                         )
     print("# 게시글이 수정되었습니다.")
 
 # 게시글 삭제하기
 def delete_post(target_post):
+    """게시글 삭제 함수"""
     post_list.remove(target_post)
     print("# 게시글이 삭제되었습니다.")
+    
+# 게시글 저장하기
+def save():
+    """게시글 저장 함수"""
+    f = open(file_path, "w", encoding="utf8")
+    writer = csv.writer(f)
+    for post in post_list:
+        row = [post.get_id(),
+               post.get_title(),
+               post.get_content(),
+               post.get_view_count(),
+               ]
+        writer.writerow(row)
+    f.close()
+    print("# Data 저장이 완료되었습니다.")
+    print("# 프로그램이 종료됩니다.")
+    
+    
 
 # 메뉴 출력하기
 while True:
@@ -134,5 +160,5 @@ while True:
         elif choice == 2:
             list_post()
         elif choice == 3:
-            print("프로그램 종료")
+            save()
             break
