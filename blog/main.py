@@ -1,6 +1,8 @@
 import os
 import csv
 from secrets import choice
+
+from numpy import delete
 from post import Post
 
 # data.csv 파일 경로
@@ -77,6 +79,7 @@ def detail_post(id):
             print("제목 :", post.get_title())
             print("글 내용 :", post.get_content())
             print("조회수 :", post.get_view_count())
+            target_post = post
             
     while True:
         print("")
@@ -87,17 +90,31 @@ def detail_post(id):
             choice = int(input(">>>"))
             # 수정 기능
             if choice == 1 :
-                print(" 수정 ")
+                update_post(target_post)
                 break
             # 삭제 기능
             elif choice == 2:
-                print(" 삭제 ")
+                delete_post(target_post)
             elif choice == -1 :
                 break
             else:
                 print("잘못 입력하였습니다.")
         except ValueError:
             print("숫자를 입력해주세요.")
+            
+# 게시글 수정하기
+def update_post(target_post):
+    """게시글 수정 함수"""
+    print("\n\n- 게시글 수정 -")
+    title = input("제목을 입력해주세요.\n>>>")
+    content = input("본문을 입력해주세요.\n>>>")
+    target_post.set_post(target_post.id, title, content, target_post.view_count)
+    print("# 게시글이 수정되었습니다.")
+
+# 게시글 삭제하기
+def delete_post(target_post):
+    post_list.remove(target_post)
+    print("# 게시글이 삭제되었습니다.")
 
 # 메뉴 출력하기
 while True:
