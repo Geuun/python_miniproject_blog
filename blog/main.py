@@ -99,6 +99,7 @@ def detail_post(id):
             # 삭제 기능
             elif choice == 2:
                 delete_post(target_post)
+                break
             elif choice == -1 :
                 break
             else:
