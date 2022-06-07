@@ -55,15 +55,49 @@ def list_post():
         try:
             id = int(input(">>>"))
             if id in id_list:
-                print("게시글 상세보기")
+                detail_post(id)
+                break
             elif id == -1 :
                 break
             else:
                 print("없는 글 번호 입니다.")
         except ValueError:
-            print("숫자를 입력해 주세요.")
+            print("숫자를 입력해주세요.")
             
-
+# 게시글 상세 페이지 구현
+def detail_post(id):
+    """ 게시글 상세 보기 함수 """
+    print("\n\n- 게시글 상세 -")
+    
+    for post in post_list:
+        if post.get_id() == id :
+            # 조회수 1 증가
+            post.add_view_count()
+            print("번호 :", post.get_id())
+            print("제목 :", post.get_title())
+            print("글 내용 :", post.get_content())
+            print("조회수 :", post.get_view_count())
+            
+    while True:
+        print("")
+        print("< 수정 : 1 >")
+        print("< 삭제 : 2 >")
+        print("(메뉴로 돌아가려면 -1 을 입력해주세요.")
+        try:
+            choice = int(input(">>>"))
+            # 수정 기능
+            if choice == 1 :
+                print(" 수정 ")
+                break
+            # 삭제 기능
+            elif choice == 2:
+                print(" 삭제 ")
+            elif choice == -1 :
+                break
+            else:
+                print("잘못 입력하였습니다.")
+        except ValueError:
+            print("숫자를 입력해주세요.")
 
 # 메뉴 출력하기
 while True:
